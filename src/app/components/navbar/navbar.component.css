@@ -1,0 +1,251 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid #d0d1d2;
+}
+
+.navbar-logo {
+  flex: 0 1 auto;
+}
+
+.navbar-logo img {
+  max-width: 227px;  
+  height: auto;     
+}
+
+.navbar-search {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding-top: 1rem;
+  padding-right: 27px;
+}
+
+.navbar-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links mat-icon {
+  margin-right: 5px;
+}
+
+.navbar-account {
+  position: relative;
+}
+
+.navbar-account .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu {
+  width: 7rem;
+}
+
+.navbar-account:hover .dropdown-menu {
+  display: block;
+}
+
+.navbar-account .dropdown-menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.navbar-account .dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.navbar-category {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border-top: 1px solid #d0d1d2;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+}
+
+.category-item mat-icon {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+.category-item span {
+  display: flex;
+  align-items: center;
+}
+
+.category-item:hover {
+  border-bottom: 3px solid #bebebe;
+}
+
+.category-item:hover mat-icon {
+  color: #bebebe;
+}
+
+.category-item:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 10px;
+  display: block;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Hide the sidebar by default */
+.holiday-gifts-menu {
+  display: none;
+  position: absolute;
+  left: 100%; /* Position to the right of the Holiday Gifts link */
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  padding: 10px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* Display the sidebar only when hovering over the Holiday Gifts link */
+.holiday-gifts-link:hover .holiday-gifts-menu {
+  display: block;
+}
+
+/* Style for individual gift items */
+.holiday-gift-item {
+  padding: 8px 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.holiday-gift-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Style for the dropdown content */
+.dropdown-content {
+  display: none; /* Hide by default */
+  position: absolute;
+  top: 100%; /* Position below the HOLIDAY category */
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+}
+
+/* Show the HOLIDAY dropdown when hovering over the HOLIDAY item */
+.category-item:hover .dropdown-content {
+  display: block;
+}
+
+
+/* Style the Shop by Recipient sidebar */
+.shop-by-recipient-menu {
+  display: none;
+  position: absolute;
+  left: 100%; /* Position to the right of the Shop by Recipient link */
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  padding: 10px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* Display the sidebar only when hovering over the Shop by Recipient link */
+.shop-by-recipient-link:hover .shop-by-recipient-menu {
+  display: block;
+}
+
+/* Style for individual recipient items */
+.shop-by-recipient-item {
+  padding: 8px 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.shop-by-recipient-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+@media (max-width: 768px) {
+  .navbar-category {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .category-item {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .holiday-gifts-menu {
+    width: 100%;
+    top: auto;
+    position: static;
+  }
+}
