@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, Renderer2   } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bracelets',
   standalone: true,
-  imports:[CommonModule,CurrencyPipe],
+  imports:[CommonModule, CurrencyPipe, MatIconModule, FormsModule],
   templateUrl: './bracelets.component.html',
   styleUrls: ['./bracelets.component.css']
 })
-export class BraceletsComponent {
+
+export class BraceletsComponent implements AfterViewInit {
+  wishlist: any[] = [];
+
   products = [
     { name: 'Encircled Clasp Bangle', image: 'assets/bracelets/bracelets9.jpg', price: 100 },
     { name: 'Happy Birthday To You Charm Bracelet Set', image: 'assets/bracelets/bracelets15.jpg', price: 75 },
@@ -33,4 +38,85 @@ export class BraceletsComponent {
     { name: 'Happy Birthday Balloon T-Bar Heart Bracelet Set', image: 'assets/bracelets/bracelets16.jpg', price: 160 },
     { name: 'Heart T-Bar Snake Chain Bracelet', image: 'assets/bracelets/bracelets23.jpg', price: 85 },
   ];
+
+  showModal = false;
+  selectedProduct: any = null;
+  selectedSize: string = '';
+  activeSection: string = '';
+  hoveredProduct: any = null;
+
+  constructor(private renderer: Renderer2, private elRef: ElementRef) {}
+  
+  openProductModal(product: any) {
+    this.selectedProduct = product;
+    setTimeout(() => {
+      const modal = document.querySelector('.product-modal') as HTMLElement;
+      modal.classList.add('open');
+    }, 10); // Delay to allow DOM update
+  }
+  
+  closeProductModal() {
+    const modal = document.querySelector('.product-modal') as HTMLElement;
+    modal.classList.remove('open');
+    setTimeout(() => {
+      this.selectedProduct = null;
+    }, 300); // Match animation duration
+  }
+
+  selectSize(size: string) {
+    this.selectedSize = size; // Update the selected size
+  }
+
+  isInWishlist(product: any): boolean {
+    return this.wishlist.includes(product);
+  }
+
+  toggleWishlist(product: any): void {
+    const index = this.wishlist.indexOf(product);
+    if (index === -1) {
+      this.wishlist.push(product); 
+    } else {
+      this.wishlist.splice(index, 1); 
+    }
+  }
+
+  toggleSection(section: string) {
+    this.activeSection = this.activeSection === section ? '' : section;
+  }
+
+  addToBag(product: any) {
+    console.log('Adding product to bag:', product, 'Size:', this.selectedSize);
+  }
+
+  ngAfterViewInit() {
+    const navbar = this.elRef.nativeElement.querySelector('.navbar');
+    const modal = this.elRef.nativeElement.querySelector('.product-modal');
+
+    if (navbar && modal) {
+      const navbarHeight = navbar.clientHeight || 0;
+      this.renderer.setStyle(modal, 'marginTop', `${navbarHeight}px`);
+    }
+  }
+
+  isSortDropdownOpen = false; 
+  selectedSortOption = 'Trending Now';
+  sortOptions = ['Trending Now', 'New Arrivals', 'Best Seller', 'Highest Price', 'Lowest Price']; // Options list
+
+  toggleSortDropdown(): void {
+    this.isSortDropdownOpen = !this.isSortDropdownOpen;
+  }
+
+  selectSortOption(option: string): void {
+    this.selectedSortOption = option;
+    this.isSortDropdownOpen = false; // Close dropdown after selection
+    this.sortProducts(); // Trigger sorting logic
+  }
+
+  sortProducts(): void {
+    console.log(`Sorting products by: ${this.selectedSortOption}`);
+    // Add your sorting logic here based on the selectedSortOption value
+  }
+  
+  
 }
+

@@ -4,8 +4,10 @@
   align-items: center;
   padding: 10px 20px;
   background-color: #fff;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
   border-bottom: 2px solid #d0d1d2;
 }
@@ -86,6 +88,7 @@
   background-color: #ffffff;
   padding: 10px 20px;
   border-top: 1px solid #d0d1d2;
+  margin-top: 60px;
 }
 
 .category-item {
