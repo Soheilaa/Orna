@@ -39,6 +39,17 @@ export class BraceletsComponent implements AfterViewInit {
     { name: 'Heart T-Bar Snake Chain Bracelet', image: 'assets/bracelets/bracelets23.jpg', price: 85 },
   ];
 
+  priceRanges = [
+    { label: 'Under $50', min: 0, max: 50 },
+    { label: '$50 - $100', min: 50, max: 100 },
+    { label: '$100 - $150', min: 100, max: 150 },
+    { label: '$150 - $200', min: 150, max: 200 },
+    { label: 'Above $200', min: 200, max: Infinity }
+  ];
+
+  selectedPriceRange: any = null;
+  filteredProducts = [...this.products];
+
   showModal = false;
   selectedProduct: any = null;
   selectedSize: string = '';
@@ -98,6 +109,14 @@ export class BraceletsComponent implements AfterViewInit {
     }
   }
 
+  filterByPrice(range: any) {
+    this.selectedPriceRange = range;
+    // Filter products based on the selected price range
+    this.filteredProducts = this.products.filter(
+      (product) => product.price >= range.min && product.price <= range.max
+    );
+  }
+
   isSortDropdownOpen = false; 
   selectedSortOption = 'Trending Now';
   sortOptions = ['Trending Now', 'New Arrivals', 'Best Seller', 'Highest Price', 'Lowest Price']; // Options list
@@ -116,7 +135,6 @@ export class BraceletsComponent implements AfterViewInit {
     console.log(`Sorting products by: ${this.selectedSortOption}`);
     // Add your sorting logic here based on the selectedSortOption value
   }
-  
-  
+
 }
 

@@ -21,13 +21,27 @@
           </li>
         </ul>
       </div>
+
+      <div class="price-filter">
+        <h4>Price</h4>
+    
+         <div 
+            class="price-range" 
+            *ngFor="let range of priceRanges" 
+            (click)="filterByPrice(range)"
+          >
+          <div class="circle">{{ range.label }}</div>
+          <span>{{ range.label }}</span>
+        </div>
+      </div>
     </div>
 
     <div class="products-grid">
       <!-- Loop through products -->
       <div class="product-card" *ngFor="let product of products"
            (mouseenter)="hoveredProduct = product"
-           (mouseleave)="hoveredProduct = null">
+           (mouseleave)="hoveredProduct = null"
+      >
 
         <!-- Product image and name -->
         <img [src]="product.image" alt="{{ product.name }}" class="product-image" />

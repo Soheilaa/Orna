@@ -18,6 +18,15 @@ export class HomeComponent {
     'assets/careuselII.webp'
   ];
 
+  wrapImages = [
+    'assets/wrap-container.mp4',
+    'assets/wrap-containerI.webp',
+    'assets/wrap-containerII.webp',
+    'assets/wrap-containerIII.webp',
+    'assets/wrap-container4.webp',
+    'assets/wrap-container5.webp'
+  ];
+
   categories = [
     { name: 'BRACELETS', image: 'assets/bracelets.webp', link: '/bracelets' },
     { name: 'RINGS', image: 'assets/rings.webp', link: '/rings' },

@@ -89,12 +89,98 @@
 /* Remove underline from the links */
 .category a {
   text-decoration: none; /* Remove underline from the link */
-  color: inherit; /* Inherit the color from parent (the category-name color) */
+  color: inherit; 
 }
 
-/* Optional: Make the category items responsive on smaller screens */
+.wrap-section {
+  display: flex; /* Use flexbox to align items side by side */
+  padding: 20px;
+  margin-top: 3rem;
+}
+
+.wrap-content {
+  display: flex;
+  width: 100%;
+}
+
+.wrap-title {
+  width: 30%; /* Adjust the width to make the text section take up less space */
+  padding-right: 20px;
+  text-align: left; /* Align text to the left */
+  display: flex;
+  align-items:flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrap-title h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.wrap-title p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.wrap-images-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 10px;
+  width: 70%;
+}
+
+.wrap-item {
+  position: relative;
+}
+
+.wrap-item img, .wrap-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.wrap-item.video {
+  grid-column: span 2; /* Video spans 2 columns */
+  grid-row: span 2; /* Video takes more height */
+}
+
+.wrap-item.image1 {
+  grid-row: span 1;
+}
+
+.wrap-item.image2 {
+  grid-row: span 2; /* Image 2 has the same height as video */
+}
+
+.wrap-item.image3 {
+  grid-row: span 1;
+}
+
+.wrap-item.image4 {
+  grid-row: span 1; /* Image 4 also has a larger height */
+}
+
+.wrap-item.image5 {
+  grid-row: span 2; /* Image 5 has a larger height */
+}
+
+
 @media (max-width: 768px) {
   .category {
     width: 120px; /* Reduce the width on smaller screens */
+  }
+
+  .wrap-images-grid {
+    grid-template-columns: 1fr; /* Stack items in one column */
+    grid-template-areas:
+      "video"
+      "image1"
+      "image2"
+      "image3"
+      "image4"
+      "image5";
   }
 }
