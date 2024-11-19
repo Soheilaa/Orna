@@ -1,25 +1,29 @@
-import { Component,OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WishlistService } from '../wishlist/wishlist.service';
 import { Product } from '../../product.model';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './wishlist.component.html',
-  styleUrl: './wishlist.component.css'
+  styleUrls: ['./wishlist.component.css'],
+
 })
-export class WishlistComponent implements OnInit{
+export class WishlistComponent implements OnInit {
   wishlist: Product[] = [];
-  ngOnInit(): void {
-    const storedWishlist = localStorage.getItem('wishlist');
-    if (storedWishlist) {
-      this.wishlist = JSON.parse(storedWishlist);
-    }
+
+  constructor(private wishlistService: WishlistService) {}
+
+  ngOnInit() {
+    this.wishlistService.wishlist$.subscribe((wishlist) => {
+      this.wishlist = wishlist; // Subscribe to wishlist changes
+    });
   }
 
   removeFromWishlist(product: Product) {
-    this.wishlist = this.wishlist.filter(item => item.id !== product.id);
-    localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
+    this.wishlistService.removeFromWishlist(product);
   }
 }

@@ -1,4 +1,3 @@
-/* Base styles for the navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -11,142 +10,136 @@
     width: 100%;
     z-index: 1000;
     border-bottom: 2px solid #d0d1d2;
-  }
-  
-  .navbar-logo {
+}
+
+.navbar-logo {
     flex: 0 1 auto;
-  }
-  
-  .navbar-logo img {
+}
+
+.navbar-logo img {
     max-width: 227px;
     height: auto;
-  }
-  
-  .navbar-search {
+}
+
+.navbar-search {
     flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; 
     align-items: center;
-    padding-top: 1rem;
-    padding-right: 27px;
-  }
-  
-  .navbar-links {
+    margin-right: 20px;
+}
+
+.navbar-links {
     display: flex;
-    justify-content: flex-end;
     gap: 20px;
-  }
-  
-  .navbar-links a {
+    margin-right: 2rem;
+}
+
+.navbar-links a {
     text-decoration: none;
     color: #333;
     font-size: 16px;
     display: flex;
     align-items: center;
-  }
-  
-  .navbar-links mat-icon {
+    font-weight: 500;
+}
+
+.navbar-links mat-icon {
     margin-right: 5px;
-  }
-  
-  .navbar-account {
+}
+
+.navbar-account {
     position: relative;
-  }
-  
-  .navbar-account .dropdown-menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar-account .dropdown-menu {
+    display: none;
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 0; 
     background-color: #fff;
-    border: 1px solid #ddd;
-    display: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar-account:hover .dropdown-menu {
+    border: 1px solid #ddd;
+    z-index: 1000;
+    width: 150px;
+    text-align: left;
+}
+
+.navbar-account:hover .dropdown-menu,
+.navbar-account:focus-within .dropdown-menu {
     display: block;
-  }
-  
-  .navbar-account .dropdown-menu a {
+}
+
+.dropdown-menu a {
     display: block;
     padding: 10px;
     text-decoration: none;
     color: #333;
-  }
-  
-  .navbar-account .dropdown-menu a:hover {
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
     background-color: #f0f0f0;
-  }
-  
-/* Mobile Media Queries */
+}
+
+.navbar-account:hover:not(:hover-within) .dropdown-menu {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .navbar {
-      padding: 10px 15px;
+        flex-direction: column; 
+        padding: 10px;
     }
-  
-    /* Make the navbar links stack vertically */
-    .navbar-links {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      padding-top: 60px;
-      display: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .navbar-search, .navbar-links {
+        display: flex;
+        justify-content: center;
     }
-  
-    .navbar-links.open {
-      display: flex;
+
+    .navbar-links.open, .navbar-search.open {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        gap: 10px;
+        width: 100%; 
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
     }
-  
+
+    /* Navbar links specific for mobile */
     .navbar-links a {
-      font-size: 14px;
-      padding: 10px 20px;
-      text-align: center;
+        width: 100%; /* Full-width clickable links */
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
     }
-  
-    .navbar-search {
-      flex: 1;
-      justify-content: center;
-      padding-right: 15px;
+
+    .navbar-links a:last-child {
+        border-bottom: none;
     }
-  
-    .navbar-logo img {
-      max-width: 200px;
+}
+
+@media (min-width: 769px) {
+    .navbar {
+        flex-direction: row;
     }
-  
-    .navbar-account {
-      display: flex;
-      justify-content: center;
-    }
-  
-    /* Hamburger Menu Toggle */
-    .navbar-toggle {
-      display: block;
-    }
-  
-    .navbar-account .dropdown-menu {
-      width: 100%;
-      left: 0;
-    }
-  }
-  
-  /* Desktop Media Queries */
-  @media (min-width: 769px) {
+
     .navbar-links {
-      display: flex;
-      justify-content: flex-end;
-      gap: 20px;
+        justify-content: flex-end; 
     }
-  
-    .navbar-toggle {
-      display: none;
+
+    .navbar-search {
+        justify-content: flex-end; 
     }
-  }
-  
+
+    .navbar-links, .navbar-search {
+        display: flex;
+    }
+}

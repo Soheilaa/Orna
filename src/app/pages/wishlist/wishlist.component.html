@@ -1,15 +1,35 @@
 <div class="wishlist-container">
-    <h2>Your Wishlist</h2>
-    <div class="wishlist-items">
-      <div *ngFor="let product of wishlist" class="wishlist-item">
-        <img [src]="product.image" alt="{{ product.name }}" class="wishlist-item-image" />
-        <div class="wishlist-item-details">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-          <span>{{ product.price | currency }}</span>
-          <button (click)="removeFromWishlist(product)">Remove</button>
-        </div>
-      </div>
+
+  <div class="wishlist-banner">
+    <img src="../../../assets/wishlist.png" alt="Wishlist Banner" />
+    <h2>My Wishlist</h2>
+  </div>
+
+  <div class="wishlist-header">
+    <div class="wishlist-header-contain">
+      <mat-icon class="wishlist-icon">favorite</mat-icon>
+      <h2>My Wishlist</h2>
+      <hr/>
     </div>
   </div>
-  
+
+   <div class="wishlist-container">
+    <div *ngIf="wishlist.length > 0" class="wishlist-items">
+      <div *ngFor="let product of wishlist" class="wishlist-item">
+        <img [src]="product.image" [alt]="product.name" class="product-image" />
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.price | currency }}</p>
+        <button class="btn-secondary" (click)="removeFromWishlist(product)">
+          Remove
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="wishlist.length === 0" class="wishlist-empty">
+      <p class="empty-message">This list is empty.</p>
+      <a routerLink="/account" class="back-to-account">
+        <mat-icon>arrow_back</mat-icon> Back to My Account
+      </a>
+    </div>
+  </div>
+</div>

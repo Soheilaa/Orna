@@ -37,7 +37,7 @@ export class ProductListComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.filteredCollections = this.products; // Assign the products to display
+    this.filteredCollections = this.products;
   }
   
 

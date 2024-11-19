@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { products } from '../products'; 
 import { Product } from '../product.model'; 
 import { ProductModalComponent } from '../components/product-modal/product-modal.component';
+import { WishlistService } from '../pages/wishlist/wishlist.service'; 
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -78,10 +79,6 @@ export class BraceletsComponent implements OnInit {
     }
   }
 
-  toggleFavorite(product: Product) {
-    product.isFavorite = !product.isFavorite; // Toggle the favorite state
-  }
-
   quickShop(product: Product) {
     this.selectedProduct = product;
   }
@@ -90,10 +87,16 @@ export class BraceletsComponent implements OnInit {
     this.selectedProduct = null;
   }
 
-  toggleWishlist(product: Product) {
-    console.log('Wishlist toggled for product:', product);
-  }
+  constructor(private wishlistService: WishlistService) {}
 
+  toggleFavorite(product: Product) {
+    product.isFavorite = !product.isFavorite;
+    if (product.isFavorite) {
+      this.wishlistService.addToWishlist(product);
+    } else {
+      this.wishlistService.removeFromWishlist(product);
+    }
+  }
   selectSize(size: string) {
     this.selectedSize = size;
     console.log('Selected size:', size);

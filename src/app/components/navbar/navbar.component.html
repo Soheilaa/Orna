@@ -1,6 +1,3 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
 <header class="navbar">
   <div class="navbar-logo">
     <a [routerLink]="['/']">
@@ -25,7 +22,9 @@
     <a routerLink="/cart" matTooltip="Shopping Bag items" matTooltipPosition="below"><mat-icon>shopping_cart_outlined</mat-icon></a>
 
     <div class="navbar-account" (mouseenter)="showDropdown = true" (mouseleave)="showDropdown = false">
-      <a matTooltip="Log in to your account" matTooltipPosition="above"><mat-icon>account_circle</mat-icon> ▼</a>
+      <a matTooltip="Log in to your account" matTooltipPosition="above">
+        <mat-icon>account_circle</mat-icon> ▼
+      </a>
       <div class="dropdown-menu" *ngIf="showDropdown">
         <a routerLink="/login">Log In</a>
         <a routerLink="/signup">Join Now</a>
