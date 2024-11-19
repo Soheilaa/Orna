@@ -32,7 +32,10 @@ export class BraceletsComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.filteredCollections = this.products; // Assign the products to display
+    this.filteredCollections = this.products.map(product => ({
+      ...product,
+      isFavorite: false,
+    }));
   }
 
   selectCategory(category: string) {
@@ -73,6 +76,10 @@ export class BraceletsComponent implements OnInit {
     } else if (option === 'Price: High to Low') {
       this.filteredCollections.sort((a: Product, b: Product) => b.price - a.price);
     }
+  }
+
+  toggleFavorite(product: Product) {
+    product.isFavorite = !product.isFavorite; // Toggle the favorite state
   }
 
   quickShop(product: Product) {

@@ -32,6 +32,9 @@
     </div>
     <div class="product-grid">
       <div *ngFor="let product of filteredCollections" class="product-card">
+        <span class="favorite-icon" (click)="toggleFavorite(product)">
+          <mat-icon>{{ product.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </span>
         <img [src]="product.image" [alt]="product.alt" class="product-image" />
         <h3 class="product-name">{{ product.name }}</h3>
         <p class="product-price">{{ product.price | currency }}</p>
