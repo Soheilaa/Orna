@@ -6,7 +6,7 @@ import { BraceletsComponent } from './bracelets/bracelets.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'products', component: ProductListComponent },
+    { path: 'product-list', component: ProductListComponent },
     { path: 'cart', component: ShoppingCartComponent },
     { path: 'bracelets', component: BraceletsComponent },
 ];

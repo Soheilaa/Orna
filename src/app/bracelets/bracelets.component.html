@@ -1,156 +1,50 @@
-<div class="bracelets-page">
+<div class="filters">
   <div class="container">
+ 
     <div class="filter-sidebar">
-      <h3>Filters</h3>
-    
-      <!-- Sort Dropdown -->
+      <h2>Filters</h2>
+      <div class="category-filter">
+        <h4>Category</h4>
+        <ul>
+          <li (click)="selectCategory('all')" [class.active]="selectedCategory === 'all'">All</li>
+          <li (click)="selectCategory('bracelets')" [class.active]="selectedCategory === 'bracelets'">Bracelets</li>
+          <li (click)="selectCategory('necklaces')" [class.active]="selectedCategory === 'necklaces'">Necklaces</li>
+        </ul>
+      </div>
       <div class="sort-dropdown">
         <button (click)="toggleSortDropdown()" class="sort-button">
-          Sort: {{ selectedSortOption }}
+         <strong> Sort: </strong>{{ selectedSortOption || 'Select an option' }}
           <mat-icon [class.open]="isSortDropdownOpen">arrow_drop_down</mat-icon>
         </button>
-    
-        <!-- Sort Options -->
         <ul *ngIf="isSortDropdownOpen" class="sort-options">
-          <li 
-            *ngFor="let option of sortOptions" 
-            (click)="selectSortOption(option)" 
-            [class.active]="selectedSortOption === option"
-          >
+          <li *ngFor="let option of sortOptions" (click)="selectSortOption(option)" [class.active]="selectedSortOption === option">
             {{ option }}
           </li>
         </ul>
       </div>
-
       <div class="price-filter">
-        <h4>Price</h4>
-    
-         <div 
-            class="price-range" 
-            *ngFor="let range of priceRanges" 
-            (click)="filterByPrice(range)"
-          >
-          <div class="circle">{{ range.label }}</div>
+        <h2>Price</h2>
+        <div *ngFor="let range of priceRanges" (click)="filterByPrice(range)" class="price-range">
+          <div class="circle"></div>
           <span>{{ range.label }}</span>
         </div>
       </div>
     </div>
-
-    <div class="products-grid">
-      <!-- Loop through products -->
-      <div class="product-card" *ngFor="let product of products"
-           (mouseenter)="hoveredProduct = product"
-           (mouseleave)="hoveredProduct = null"
-      >
-
-        <!-- Product image and name -->
-        <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
-        <div class="product-name">{{ product.name }}</div>
-        <div class="product-price">{{ product.price | currency }}</div>
-
-        <!-- Quick Shop button, only visible when the product is hovered -->
-        <button *ngIf="hoveredProduct === product" class="quick-shop-button" (click)="openProductModal(product)">
-          Quick Shop
-        </button>
-      </div>
-  </div>
-</div>
-
-<!-- Product Modal -->
-<div class="product-modal" *ngIf="selectedProduct" (click)="closeProductModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <span class="close-button" (click)="closeProductModal()">×</span>
-
-    <div class="product-modal-header">
-      <!-- Left Column: Product Image -->
-      <div class="product-image-container">
-        <img [src]="selectedProduct.image" alt="{{ selectedProduct.name }}" class="modal-product-image" />
-      </div>
-
-      <!-- Right Column: Product Details -->
-      <div class="product-info">
-        <h2>{{ selectedProduct.name }}</h2>
-        <div class="product-reviews">
-          <span *ngFor="let star of [1, 2, 3, 4, 5]">
-            <mat-icon>star</mat-icon>
-          </span>
-        </div>
-        <p class="product-price">{{ selectedProduct.price | currency }}</p>
-        
-        <div class="size-selector">
-          <label>Select Size:</label>
-          <div class="size-options">
-            <!-- Loop through numbers 1 to 7 -->
-            <div 
-              *ngFor="let size of ['6.3in', '6.7in', '7.1in', '7.5in', '7.9in', '8.3in', '9in']" 
-              class="size-option" 
-              [class.selected]="size === selectedSize"
-              (click)="selectSize(size)"
-            >
-              {{ size }}
-            </div>
-          </div>
-        </div>
-
-        <div class="wishlist-icon" 
-          [class.selected]="isInWishlist(selectedProduct)"
-          (click)="toggleWishlist(selectedProduct)"> Save to Wishlist
-          <mat-icon>{{ isInWishlist(selectedProduct) ? 'favorite' : 'favorite_border' }}</mat-icon>
-        </div>
-
-    <!-- Product Details and Shipping Info -->
-    <div class="product-details">
-      <!-- Product Details Section -->
-      <div class="expandable-section" (click)="toggleSection('product-details')">
-        <h3>Product Details</h3>
-        <mat-icon>{{ activeSection === 'product-details' ? 'remove' : 'add' }}</mat-icon>
-      </div>
-
-      <div *ngIf="activeSection === 'product-details'">
-        <p>Set your heart a-flutter with this romantic version of Orna's bestselling charm bracelet. 
-          Hand-finished with a heart-shaped clasp, this sterling silver snake chain bracelet looks stunning 
-          on its own but even better adorned with your favorite Orna charms and clips. Layer it with contrasting 
-          Orna chain bracelets for a chic, multi-layered look.
-        </p>
-      </div>
-
-      <div class="expandable-section" (click)="toggleSection('shipping-info')">
-        <h3>Shipping & Returns</h3>
-        <mat-icon>{{ activeSection === 'shipping-info' ? 'remove' : 'add' }}</mat-icon>
-      </div>
-      <div *ngIf="activeSection === 'shipping-info'" class="shipping-returns-details">
-        <h4>
-          <strong>
-            <mat-icon class="icon">directions_car</mat-icon> Ship to Home
-          </strong>
-        </h4>
-        <p>Standard Shipping</p>
-        <p>• FREE on all orders $75+.</p>
-        <p>• Arrives in 3-5 business days.</p>
-        
-        <p>Express Shipping</p>
-        <p>• Free on Lab-Grown Diamonds.</p>
-        <p>• Arrives in 1-2 business days.</p>
-
-        <h4>
-          <strong>
-            <mat-icon class="icon">store</mat-icon> In-Store Pickup
-          </strong>
-        </h4>
-        <p>• Free on all orders.</p>
-        <p>• Ready for pickup within 2 hours.</p>
-
-        <h4>
-          <strong>
-            <mat-icon class="icon">compare_arrows</mat-icon> Returns
-          </strong>
-        </h4>
-        <p>• Extended holiday returns to January 31, 2025.</p>
-        <p>• Prepaid return label included.</p>
+    <div class="product-grid">
+      <div *ngFor="let product of filteredCollections" class="product-card">
+        <img [src]="product.image" [alt]="product.name" class="product-image" />
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">{{ product.price | currency }}</p>
+        <button class="btn-primary" (click)="quickShop(product)">Quick Shop</button>
       </div>
     </div>
-    <hr class="divider" />
-    <button class="add-to-bag-button">ADD TO BAG</button>
-  </div>
-</div>
-</div>
+    
+  <app-product-modal
+  *ngIf="selectedProduct"
+  [selectedProduct]="selectedProduct"
+  [selectedSize]="selectedSize"
+  [activeSection]="activeSection"
+  (closeModal)="closeProductModal()"
+  (addToWishlist)="toggleWishlist($event)"
+  (sizeSelected)="selectSize($event)">
+</app-product-modal>

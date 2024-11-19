@@ -1,0 +1,251 @@
+.product-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  .modal-content {
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    height: 85vh;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .modal-header h2 {
+    font-size: 26px;
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .close-button {
+    font-size: 32px;
+    color: #333;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  
+  .close-button:hover {
+    color: #ff0000;
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    flex: 1;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #555;
+  }
+  
+  .modal-image-container {
+    width: 40%;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  
+  .modal-details {
+    width: 60%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+  
+  h3, h4 {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  h3 {
+    font-size: 18px;
+  }
+  
+  h4 {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666;
+    margin: 10px 0;
+  }
+  
+  .size-selector button {
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    line-height: 1.4;
+  }
+  
+  .size-selector button.selected {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .size-selector button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .expandable-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f1f1;
+  }
+  
+  .expandable-section:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .wishlist {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  .wishlist mat-icon {
+    font-size: 26px;
+  }
+  
+  .shipping-returns-details h4, .shipping-returns-details p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .btn-primary {
+    padding: 16px 32px;
+    background-color: #151516;
+    border: 1px solid white;
+    color: #fff;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #252729;
+  }
+  
+  @media (max-width: 768px) {
+    .modal-content {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .modal-image-container,
+    .modal-details {
+      width: 100%;
+    }
+  
+    .modal-header h2 {
+      font-size: 22px; 
+    }
+  
+    h3 {
+      font-size: 16px; 
+    }
+  
+    h4 {
+      font-size: 14px; 
+    }
+
+    .size-selector button {
+      font-size: 14px;
+      padding: 10px 18px;
+    }
+
+    .btn-primary {
+      font-size: 14px;
+    }
+  
+    p {
+      font-size: 14px; 
+    }
+ 
+    .close-button {
+      font-size: 36px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .modal-content {
+      max-width: 1200px; 
+    }
+  
+    .modal-body {
+      padding: 40px;
+    }
+  
+    .modal-image-container {
+      padding: 30px;
+    }
+  
+    .modal-details {
+      padding: 30px;
+    }
+
+    .size-selector button {
+      font-size: 16px; 
+      padding: 14px 25px;
+    }
+
+    .btn-primary {
+      font-size: 18px;
+    }
+    .close-button {
+      font-size: 36px;
+      padding: 1rem;
+    }
+  }
+      

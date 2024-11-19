@@ -1,0 +1,86 @@
+<ng-container *ngIf="selectedProduct">
+  <div class="product-modal" (click)="closeProductModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close-button" (click)="closeProductModal()" aria-label="Close modal">×</span>
+
+      <div class="modal-image-container">
+        <img [src]="selectedProduct.image" [alt]="selectedProduct.name" class="modal-image" />
+      </div>
+
+      <div class="modal-details">
+        <h2>{{ selectedProduct.name }}</h2>
+        <p class="product-description">{{ selectedProduct.description || 'No description available.' }}</p>
+
+        <div class="size-selector">
+          <h3>Select Size:</h3>
+          <div class="sizes">
+            <button *ngFor="let size of ['6.3in', '6.7in', '7.1in', '7.5in', '7.9in', '8.3in', '9in']"
+                    [class.selected]="size === selectedSize"
+                    (click)="selectSize(size)"
+                    [attr.aria-label]="'Select size ' + size">
+              {{ size }}
+            </button>
+          </div>
+        </div>
+
+        <div class="wishlist" (click)="toggleWishlist(selectedProduct)" tabindex="0" aria-label="Toggle Wishlist">
+          <mat-icon>{{ isInWishlist(selectedProduct) ? 'favorite' : 'favorite_border' }}</mat-icon>
+          Save to Wishlist
+        </div>
+
+        <div class="expandable-section" (click)="toggleSection('product-details')">
+          <h3>Product Details</h3>
+          <mat-icon>{{ activeSection === 'product-details' ? 'remove' : 'add' }}</mat-icon>
+        </div>
+
+        <div *ngIf="activeSection === 'product-details'">
+          <p>Set your heart a-flutter with this romantic version of Orna's bestselling charm bracelet. 
+            Hand-finished with a heart-shaped clasp, this sterling silver snake chain bracelet looks stunning 
+            on its own but even better adorned with your favorite Orna charms and clips. Layer it with contrasting 
+            Orna chain bracelets for a chic, multi-layered look.
+          </p>
+        </div>
+
+        <!-- Shipping & Returns Expandable Section -->
+        <div class="expandable-section" (click)="toggleSection('shipping-info')">
+          <h3>Shipping & Returns</h3>
+          <mat-icon>{{ activeSection === 'shipping-info' ? 'remove' : 'add' }}</mat-icon>
+        </div>
+
+        <div *ngIf="activeSection === 'shipping-info'" class="shipping-returns-details">
+          <h4>
+            <strong>
+              <mat-icon class="icon">directions_car</mat-icon> Ship to Home
+            </strong>
+          </h4>
+          <p>Standard Shipping</p>
+          <p>• FREE on all orders $75+.</p>
+          <p>• Arrives in 3-5 business days.</p>
+
+          <p>Express Shipping</p>
+          <p>• Free on Lab-Grown Diamonds.</p>
+          <p>• Arrives in 1-2 business days.</p>
+
+          <h4>
+            <strong>
+              <mat-icon class="icon">store</mat-icon> In-Store Pickup
+            </strong>
+          </h4>
+          <p>• Free on all orders.</p>
+          <p>• Ready for pickup within 2 hours.</p>
+
+          <h4>
+            <strong>
+              <mat-icon class="icon">compare_arrows</mat-icon> Returns
+            </strong>
+          </h4>
+          <p>• Extended holiday returns to January 31, 2025.</p>
+          <p>• Prepaid return label included.</p>
+        </div>
+
+        <!-- Add to Bag -->
+        <button class="btn-primary add-to-bag">ADD TO BAG</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
