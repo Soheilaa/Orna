@@ -1,0 +1,15 @@
+<div class="wishlist-container">
+    <h2>Your Wishlist</h2>
+    <div class="wishlist-items">
+      <div *ngFor="let product of wishlist" class="wishlist-item">
+        <img [src]="product.image" alt="{{ product.name }}" class="wishlist-item-image" />
+        <div class="wishlist-item-details">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <span>{{ product.price | currency }}</span>
+          <button (click)="removeFromWishlist(product)">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

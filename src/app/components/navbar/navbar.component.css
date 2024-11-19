@@ -1,1 +1,152 @@
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background-color:#fff;position:fixed;top:0;left:0;width:100%;z-index:1000;border-bottom:2px solid #d0d1d2}.navbar-logo{flex:0 1 auto}.navbar-logo img{max-width:227px;height:auto}.navbar-search{flex:1;display:flex;justify-content:right;align-items:center;padding-top:1rem;padding-right:27px}.navbar-links{display:flex;justify-content:flex-end;gap:20px}.navbar-links a{text-decoration:none;color:#333;font-size:16px;display:flex;align-items:center}.navbar-links mat-icon{margin-right:5px}.navbar-account{position:relative}.navbar-account .dropdown-menu{position:absolute;top:100%;right:0;background-color:#fff;border:1px solid #ddd;display:none;box-shadow:0 4px 8px rgba(0,0,0,0.1)}.dropdown-menu{width:7rem}.navbar-account:hover .dropdown-menu{display:block}.navbar-account .dropdown-menu a{display:block;padding:10px;text-decoration:none;color:#333}.navbar-account .dropdown-menu a:hover{background-color:#f0f0f0}.navbar-category{display:flex;justify-content:space-around;align-items:center;background-color:#ffffff;padding:10px 20px;border-top:1px solid #d0d1d2;margin-top:60px}.category-item{display:flex;align-items:center;font-size:14px;font-weight:400;color:#333;cursor:pointer;position:relative}.category-item mat-icon{display:flex;align-items:center;margin-left:5px;font-size:18px}.category-item span{display:flex;align-items:center}.category-item:hover{border-bottom:3px solid #bebebe}.category-item:hover mat-icon{color:#bebebe}.category-item:hover .dropdown-content{display:block}.dropdown-content{display:none;position:absolute;top:100%;left:0;background-color:#fff;box-shadow:0 4px 8px rgba(0,0,0,0.1);width:200px;padding:10px;z-index:1000}.dropdown-content a{text-decoration:none;color:#333;padding:8px 10px;display:block;font-size:14px;transition:background-color 0.2s ease}.dropdown-content a:hover{background-color:#f0f0f0}.holiday-gifts-menu{display:none;position:absolute;left:100%;top:0;background-color:#fff;box-shadow:0 4px 8px rgba(0,0,0,0.1);width:250px;padding:10px;z-index:1000;transition:all 0.3s ease}.holiday-gifts-link:hover .holiday-gifts-menu{display:block}.holiday-gift-item{padding:8px 10px;text-decoration:none;color:#333;font-size:14px;cursor:pointer;text-align:center}.holiday-gift-item:hover{background-color:#f0f0f0}.shop-by-recipient-menu{display:none;position:absolute;left:100%;top:0;background-color:#fff;box-shadow:0 4px 8px rgba(0,0,0,0.1);width:250px;padding:10px;z-index:1000;transition:all 0.3s ease}.shop-by-recipient-link:hover .shop-by-recipient-menu{display:block}.shop-by-recipient-item{padding:8px 10px;text-decoration:none;color:#333;font-size:14px;cursor:pointer;text-align:center}.shop-by-recipient-item:hover{background-color:#f0f0f0}@media (max-width:768px){.navbar-category{flex-direction:column;align-items:flex-start}.category-item{width:100%;padding:10px 0}.holiday-gifts-menu{width:100%;top:auto;position:static}}
+/* Base styles for the navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid #d0d1d2;
+  }
+  
+  .navbar-logo {
+    flex: 0 1 auto;
+  }
+  
+  .navbar-logo img {
+    max-width: 227px;
+    height: auto;
+  }
+  
+  .navbar-search {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 1rem;
+    padding-right: 27px;
+  }
+  
+  .navbar-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-links mat-icon {
+    margin-right: 5px;
+  }
+  
+  .navbar-account {
+    position: relative;
+  }
+  
+  .navbar-account .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-account:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .navbar-account .dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .navbar-account .dropdown-menu a:hover {
+    background-color: #f0f0f0;
+  }
+  
+/* Mobile Media Queries */
+@media (max-width: 768px) {
+    .navbar {
+      padding: 10px 15px;
+    }
+  
+    /* Make the navbar links stack vertically */
+    .navbar-links {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding-top: 60px;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .navbar-links.open {
+      display: flex;
+    }
+  
+    .navbar-links a {
+      font-size: 14px;
+      padding: 10px 20px;
+      text-align: center;
+    }
+  
+    .navbar-search {
+      flex: 1;
+      justify-content: center;
+      padding-right: 15px;
+    }
+  
+    .navbar-logo img {
+      max-width: 200px;
+    }
+  
+    .navbar-account {
+      display: flex;
+      justify-content: center;
+    }
+  
+    /* Hamburger Menu Toggle */
+    .navbar-toggle {
+      display: block;
+    }
+  
+    .navbar-account .dropdown-menu {
+      width: 100%;
+      left: 0;
+    }
+  }
+  
+  /* Desktop Media Queries */
+  @media (min-width: 769px) {
+    .navbar-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+  
+    .navbar-toggle {
+      display: none;
+    }
+  }
+  

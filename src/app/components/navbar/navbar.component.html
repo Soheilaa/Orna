@@ -1,3 +1,6 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 <header class="navbar">
   <div class="navbar-logo">
     <a [routerLink]="['/']">
@@ -18,7 +21,7 @@
   <nav class="navbar-links">
     <a [routerLink]="['/']" matTooltip="Home Page" matTooltipPosition="below"><mat-icon >home</mat-icon></a>
     <a [routerLink]="['/product-list']" matTooltip="Product list" matTooltipPosition="below"><mat-icon>store</mat-icon></a>
-    <a routerLink="/favorites" matTooltip="Wishlist" matTooltipPosition="below"><mat-icon>favorite_border</mat-icon></a>
+    <a [routerLink]="['/wishlist']" matTooltip="Wishlist" matTooltipPosition="below"><mat-icon>favorite_border</mat-icon></a>
     <a routerLink="/cart" matTooltip="Shopping Bag items" matTooltipPosition="below"><mat-icon>shopping_cart_outlined</mat-icon></a>
 
     <div class="navbar-account" (mouseenter)="showDropdown = true" (mouseleave)="showDropdown = false">
@@ -31,68 +34,3 @@
   </nav>
 </header>
 
-<div class="navbar-category">
-
-  <div class="category-item">
-    <span>ALL COLLECTIONS </span>
-  </div>
-
-  <div class="category-item">
-    <span>HOLIDAY <mat-icon>expand_more</mat-icon></span>
-
-    <!-- Dropdown content for HOLIDAY -->
-    <div class="dropdown-content">
-      <!-- Link to open sidebar on hover -->
-      <div class="holiday-gifts-link">
-        <a href="#">Holiday Gifts</a>
-
-        <!-- Sidebar menu for Holiday Gifts -->
-        <div class="holiday-gifts-menu">
-          <div class="holiday-gift-item">Top Holiday Gift</div>
-          <div class="holiday-gift-item">Gift Sets</div>
-        </div>
-      </div>
-      <div class="shop-by-recipient-link">
-        <a href="#">Shop by Recipient</a>
-
-        <!-- Sidebar menu for Holiday Gifts -->
-        <div class="shop-by-recipient-menu">
-          <div class="shop-by-recipient-item">Gift for Mom</div>
-          <div class="shop-by-recipient-item">Gift for Partner</div>
-          <div class="shop-by-recipient-item">Gift for Friend</div>
-          <div class="shop-by-recipient-item">Gift for Daughter</div>
-          <div class="shop-by-recipient-item">Gift for Sister</div>
-          <div class="shop-by-recipient-item">Gift for Grandmother</div>
-          <div class="shop-by-recipient-item">Gift for Him</div>
-        </div>
-      </div>
-      <a href="#">Shop by Price</a>
-    </div>
-  </div>
-
-  <div class="category-item">
-    <span>BRACELETS <mat-icon>expand_more</mat-icon></span>
-  </div>
-
-  <div class="category-item">
-    <span>RINGS <mat-icon>expand_more</mat-icon></span>
-  </div>
-
-  <div class="category-item">
-    <span>NECKLACES <mat-icon>expand_more</mat-icon></span>
-  </div>
-
-  <div class="category-item">
-    <span>EARRINGS <mat-icon>expand_more</mat-icon></span>
-  </div>
-
-  <div class="category-item">
-    <span>GIFTS <mat-icon>expand_more</mat-icon></span>
-  </div>
-
-</div>
-
-<div class="holiday-gifts-menu">
-  <div class="holiday-gift-item">Top Holiday Gift</div>
-  <div class="holiday-gift-item">Gift Sets</div>
-</div>

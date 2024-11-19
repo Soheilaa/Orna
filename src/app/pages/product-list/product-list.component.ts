@@ -92,7 +92,23 @@ export class ProductListComponent implements OnInit {
   }
 
   toggleWishlist(product: Product) {
-    console.log('Wishlist toggled for product:', product);
+    const currentWishlist = localStorage.getItem('wishlist');
+    let wishlist: Product[] = currentWishlist ? JSON.parse(currentWishlist) : [];
+
+    const productIndex = wishlist.findIndex(p => p.id === product.id);
+    if (productIndex === -1) {
+      wishlist.push(product);
+      console.log('Product added to wishlist:', product);
+    } else {
+      wishlist.splice(productIndex, 1);
+      console.log('Product removed from wishlist:', product);
+    }
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }
+
+  isProductInWishlist(product: Product): boolean {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    return wishlist.some((p: Product) => p.id === product.id);
   }
 
   selectSize(size: string) {

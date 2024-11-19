@@ -25,4 +25,9 @@ import { RouterModule } from '@angular/router';
 
 export class NavbarComponent {
   showDropdown = false;
+  isNavbarOpen = false;
+
+  toggleNavbar() {
+    this.isNavbarOpen = !this.isNavbarOpen;
+  }
 }

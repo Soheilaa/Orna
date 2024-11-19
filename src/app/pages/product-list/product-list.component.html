@@ -12,4 +12,16 @@
 
 <ng-container *ngComponentOutlet="braceletsComponent"></ng-container>
 
+<div *ngFor="let product of filteredCollections" class="product-card">
+  <img [src]="product.image" alt="{{ product.name }}" />
+  <h3>{{ product.name }}</h3>
+  <p>{{ product.description }}</p>
+  <p>{{ product.price | currency }}</p>
+
+  <!-- Wishlist Toggle Button -->
+  <button (click)="toggleWishlist(product)">
+    {{ isProductInWishlist(product) ? 'Remove from Wishlist' : 'Add to Wishlist' }}
+  </button>
+</div>
+
 </div>
