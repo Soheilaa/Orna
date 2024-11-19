@@ -4,16 +4,20 @@ import { products } from '../../products';
 import { Product } from '../../product.model';
 import { ProductModalComponent } from '../../components/product-modal/product-modal.component';
 import { MatIconModule } from '@angular/material/icon';
+import { BraceletsComponent } from '../../bracelets/bracelets.component'; 
+
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [MatIconModule,CommonModule, ProductModalComponent],
+  imports: [MatIconModule, CommonModule, ProductModalComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
 
 export class ProductListComponent implements OnInit {
+  braceletsComponent = BraceletsComponent;
+  isBraceletsPage = true;
   filteredCollections: Product[] = [];
   selectedProduct: Product | null = null;
   selectedSize: string = '';
