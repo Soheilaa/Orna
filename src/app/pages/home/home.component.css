@@ -14,6 +14,22 @@
   overflow: hidden;
 }
 
+.carousel-overlay {
+  position: absolute;
+  top: 77%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  color: white;
+  z-index: 5; 
+}
+
+.carousel-overlay h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); 
+}
+
 .carousel-image {
   width: 100%; 
   height: 100%;
@@ -32,7 +48,22 @@
   padding: 10px;
   cursor: pointer;
   z-index: 10;
+}
+
+.carousel-overlay button {
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
   transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.carousel-overlay button:hover {
+  background-color: #000000; 
+  color: white;
 }
 
 .carousel-control:hover {
@@ -59,41 +90,37 @@
   margin-top: 30px; 
 }
 
-/* Style for individual category items */
 .category {
-  width: 160px; /* Set the width of each category item */
-  text-align: center; /* Center the text */
+  width: 160px; 
+  text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out; /* Optional: add a hover effect */
+  transition: transform 0.3s ease-in-out; 
 }
 
 .category:hover {
-  transform: scale(1.05); /* Optional: Slightly enlarge the item on hover */
+  transform: scale(1.05); 
 }
 
-/* Style for the category images */
 .category-image {
-  width: 100%; /* Make the image responsive to the width of its parent */
+  width: 100%; 
   height: auto;
-  border-radius: 8px; /* Optional: add rounded corners to images */
+  border-radius: 8px; 
 }
 
-/* Style for category name text */
 .category-name {
   margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
-  color: #333; /* Optional: Customize text color */
+  color: #333; 
 }
 
-/* Remove underline from the links */
 .category a {
-  text-decoration: none; /* Remove underline from the link */
+  text-decoration: none; 
   color: inherit; 
 }
 
 .wrap-section {
-  display: flex; /* Use flexbox to align items side by side */
+  display: flex; 
   padding: 20px;
   margin-top: 3rem;
 }
@@ -104,9 +131,9 @@
 }
 
 .wrap-title {
-  width: 30%; /* Adjust the width to make the text section take up less space */
+  width: 30%; 
   padding-right: 20px;
-  text-align: left; /* Align text to the left */
+  text-align: left;
   display: flex;
   align-items:flex-start;
   flex-direction: column;

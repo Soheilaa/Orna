@@ -3,8 +3,12 @@
       <button class="carousel-control prev" (click)="prevImage()">
         <i class="material-icons">chevron_left</i>
       </button>
-  
+
       <img [src]="images[currentImageIndex]" alt="Carousel Image" class="carousel-image">
+      <div class="carousel-overlay">
+        <button [routerLink]="['/product-list']">ALL COLLECTIONS</button>
+        <h2>GIFT FROM THE HEART</h2>
+      </div>
 
       <button class="carousel-control next" (click)="nextImage()">
         <i class="material-icons">chevron_right</i>
