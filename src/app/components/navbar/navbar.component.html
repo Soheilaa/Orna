@@ -1,35 +1,75 @@
 <header class="navbar">
-  <div class="navbar-logo">
-    <a [routerLink]="['/']">
-      <img src="../../../assets/logo-ORNA.png" alt="Orna Logo" />
-    </a>
-  </div>
 
-  <div class="navbar-search">
-    <mat-form-field appearance="outline">
-      <input matInput placeholder="Search" alt="searchbar" />
-      <button mat-icon-button matSuffix>
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
+  <div class="manu-navbar-container">
+    <!-- Mobile: Menu Icon -->
+    <div class="menu-icon" (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </div>
+
+    <div class="navbar-logo">
+      <a [routerLink]="['/']">
+        <img src="../../../assets/logo-ORNA.png" alt="Orna Logo" />
+      </a>
+    </div>
   </div>
-  
+  <!-- Sidebar (for Mobile Only) -->
+  <div class="sidebar" [class.active]="isSidebarOpen">
+    <a [routerLink]="['/']">Home</a>
+    <div class="categories-list">
+      <a [routerLink]="['/categories']">Categories</a>
+      <a [routerLink]="['/wishlist']">Wishlist</a>
+      <a [routerLink]="['/login']">Log In</a>
+    </div>
+  </div>
 
   <nav class="navbar-links">
-    <a [routerLink]="['/']" matTooltip="Home Page" matTooltipPosition="below"><mat-icon >home</mat-icon></a>
-    <a [routerLink]="['/product-list']" matTooltip="Product list" matTooltipPosition="below"><mat-icon>store</mat-icon></a>
-    <a [routerLink]="['/wishlist']" matTooltip="Wishlist" matTooltipPosition="below"><mat-icon>favorite_border</mat-icon></a>
-    <a routerLink="/cart" matTooltip="Shopping Bag items" matTooltipPosition="below"><mat-icon>shopping_cart_outlined</mat-icon></a>
+    <div class="navbar-search">
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Search" alt="searchbar" />
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <a [routerLink]="['/']" matTooltip="Home Page" matTooltipPosition="below">
+      <mat-icon>home</mat-icon>Home Page
+    </a>
+
+    <div class="categories-link">
+      <a matTooltip="Categories" matTooltipPosition="above">
+        <mat-icon>store</mat-icon>Categories
+      </a>
+
+      <div class="categories-dropdown">
+        <div class="category" *ngFor="let category of categories">
+          <a [routerLink]="[category.link]" class="category-link">
+            <img [src]="category.image" alt="{{category.name}}" class="category-image" />
+            <span class="category-name">{{category.name}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <a [routerLink]="['/wishlist']" matTooltip="Wishlist" matTooltipPosition="below">
+      <mat-icon>favorite_border</mat-icon>
+    </a>
+    <a routerLink="/cart" matTooltip="Shopping Bag items" matTooltipPosition="below">
+      <mat-icon>shopping_cart_outlined</mat-icon>
+    </a>
 
     <div class="navbar-account" (mouseenter)="showDropdown = true" (mouseleave)="showDropdown = false">
       <a matTooltip="Log in to your account" matTooltipPosition="above">
-        <mat-icon>account_circle</mat-icon> ▼
+        <mat-icon>account_circle</mat-icon>
       </a>
       <div class="dropdown-menu" *ngIf="showDropdown">
         <a routerLink="/login">Log In</a>
         <a routerLink="/signup">Join Now</a>
       </div>
     </div>
+    
   </nav>
 </header>
+
+
 
