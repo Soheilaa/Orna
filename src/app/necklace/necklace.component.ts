@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from '../products'; 
+import { necklaces } from './necklaces';
 import { Product } from '../product.model'; 
 import { ProductModalComponent } from '../components/product-modal/product-modal.component';
 import { WishlistService } from '../pages/wishlist/wishlist.service'; 
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
-  selector: 'app-bracelets',
+  selector: 'app-necklace-list',
   standalone: true,
-  imports: [CommonModule, ProductModalComponent,MatIconModule],
-  templateUrl: './bracelets.component.html',
-  styleUrls: ['./bracelets.component.css'],
+  imports: [CommonModule, ProductModalComponent, MatIconModule,RouterModule],
+  templateUrl: './necklace.component.html',
+  styleUrls: ['./necklace.component.css'],
 })
-export class BraceletsComponent implements OnInit {
-  
-  filteredCollections: Product[] = [];
 
+export class NecklaceListComponent implements OnInit {
+
+  filteredCollections: Product[] = [];
+  
   selectedProduct: Product | null = null;
   selectedSize: string = '';
   activeSection: string = 'details';
-  selectedCategory: string = 'all';
+  selectedCategory: string = 'all'; // Default category
   selectedSortOption: string = '';
   isSortDropdownOpen: boolean = false;
-
-  products: Product[] = products;
+  
+  products: Product[] = necklaces; // Use the necklaces array
 
   sortOptions: string[] = ['Price: Low to High', 'Price: High to Low', 'Newest', 'Best Seller'];
   priceRanges = [
@@ -34,6 +37,8 @@ export class BraceletsComponent implements OnInit {
     { label: '$100 - $200', min: 100, max: 200 },
     { label: 'Above $200', min: 200, max: 9999 },
   ];
+  
+  constructor(private router: Router, private wishlistService: WishlistService) {}
 
   ngOnInit() {
     this.filteredCollections = this.products.map(product => ({
@@ -49,17 +54,19 @@ export class BraceletsComponent implements OnInit {
 
   filterProducts(range?: { min: number; max: number }) {
     if (this.selectedCategory !== 'all') {
-      this.filteredCollections = this.products.filter(product => product.category === this.selectedCategory);
+      this.filteredCollections = this.products.filter(product => product.category === this.selectedCategory || this.selectedCategory === 'all');
     } else {
       this.filteredCollections = this.products;
     }
-    
+  
     if (range) {
       this.filteredCollections = this.filteredCollections.filter(product =>
         product.price >= range.min && product.price <= range.max
       );
     }
+    console.log(this.filteredCollections);  // Debugging log after filtering
   }
+  
 
   filterByPrice(range: { min: number; max: number }) {
     this.filterProducts(range);
@@ -90,12 +97,9 @@ export class BraceletsComponent implements OnInit {
     this.selectedProduct = null;
   }
 
-  constructor(private router: Router, private wishlistService: WishlistService) {}
-
   navigateToProduct(productId: number) {
     this.router.navigate(['/product-detail', productId]);
   }
-  
 
   toggleFavorite(product: Product) {
     product.isFavorite = !product.isFavorite;
@@ -105,6 +109,7 @@ export class BraceletsComponent implements OnInit {
       this.wishlistService.removeFromWishlist(product);
     }
   }
+  
   selectSize(size: string) {
     this.selectedSize = size;
     console.log('Selected size:', size);

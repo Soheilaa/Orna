@@ -5,24 +5,32 @@ import { Product } from '../../product.model';
 import { ProductModalComponent } from '../../components/product-modal/product-modal.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BraceletsComponent } from '../../bracelets/bracelets.component'; 
-
+import { NecklaceListComponent } from '../../necklace/necklace.component'; 
+import { ActivatedRoute } from '@angular/router';
+import { necklaces } from '../../necklace/necklaces';
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [MatIconModule, CommonModule, ProductModalComponent],
+  imports: [MatIconModule, CommonModule, ProductModalComponent, RouterModule],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
 
 export class ProductListComponent implements OnInit {
+
+  product: Product | undefined;
   braceletsComponent = BraceletsComponent;
+  necklaceListComponent = NecklaceListComponent;
+  
   isBraceletsPage = true;
   filteredCollections: Product[] = [];
   selectedProduct: Product | null = null;
   selectedSize: string = '';
   activeSection: string = 'details';
-  selectedCategory: string = 'all'; // Default category
+  selectedCategory: string = 'all'; 
   selectedSortOption: string = '';
   isSortDropdownOpen: boolean = false;
 
@@ -36,11 +44,30 @@ export class ProductListComponent implements OnInit {
     { label: 'Above $200', min: 200, max: 9999 },
   ];
 
-  ngOnInit() {
-    this.filteredCollections = this.products;
-  }
-  
+  // new code
 
+  filterSettings = {
+    category: 'all',
+    priceRange: null,
+  };
+  sortOption: string = '';
+
+  onFilterChanged(filters: any) {
+    this.filterSettings = filters;
+  }
+
+  onSortChanged(sortOption: string) {
+    this.sortOption = sortOption;
+  }
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    const productId = +this.route.snapshot.paramMap.get('id')!; // Get the product id from route params
+    this.product = necklaces.find(p => p.id === productId); // Find product by id from the data array
+  }
+
+  
   selectCategory(category: string) {
     this.selectedCategory = category;
     this.filterProducts(); // Reapply filters based on the selected category
@@ -116,3 +143,4 @@ export class ProductListComponent implements OnInit {
     console.log('Selected size:', size);
   }
 }
+

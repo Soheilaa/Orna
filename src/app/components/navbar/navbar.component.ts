@@ -30,12 +30,12 @@ export class NavbarComponent {
   showCategories = false;
 
   categories = [
-    { name: 'ALL COLLECTIONS', link: '/product-list', image: 'assets/all.jpg' },
+    // { name: 'ALL COLLECTIONS', link: '/product-list', image: 'assets/all.jpg' },
     { name: 'Bracelets', link: '/bracelets', image: 'assets/bracelets/bracelets.webp' },
-    { name: 'Rings', link: '/rings', image: 'assets/rings.webp' },
+    // { name: 'Rings', link: '/rings', image: 'assets/rings.webp' },
     { name: 'Necklaces', link: '/necklaces', image: 'assets/necklaces.webp' },
-    { name: 'Earrings', link: '/earrings', image: 'assets/earrings.webp' },
-    { name: 'New In', link: '/new-in', image: 'assets/newin.webp' },
+    // { name: 'Earrings', link: '/earrings', image: 'assets/earrings.webp' },
+    // { name: 'New In', link: '/new-in', image: 'assets/newin.webp' },
   ];
 
   navigateToCategory(link: string) {

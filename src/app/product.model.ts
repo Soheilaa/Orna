@@ -7,8 +7,10 @@ export interface Product {
   description?: string;
   image: string; 
   alt?: string;
+  metal?:string;
   size?: string[]; 
   sold?: number;
   dateAdded?: string;
+  shippingInfo?: string;
 }
 

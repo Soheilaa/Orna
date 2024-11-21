@@ -1,3 +1,13 @@
+
+<div class="bracelet-header">
+  <img src="../../assets/bracelets/cover.jpg" alt="Bracelets Header" class="header-image" />
+  <div class="header-text">
+    <h1>Bracelets</h1>
+    <p>See the beautiful range of Orna bracelets in sterling silver, gold, and leather to suit.</p>
+  </div>
+</div>
+
+
 <div class="filters">
   <div class="container">
  
@@ -35,8 +45,15 @@
         <span class="favorite-icon" (click)="toggleFavorite(product)">
           <mat-icon>{{ product.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
         </span>
-        <img [src]="product.image" [alt]="product.alt" class="product-image" />
-        <h3 class="product-name">{{ product.name }}</h3>
+        <img 
+          [src]="product.image" 
+          [alt]="product.alt" 
+          class="product-image" 
+          (click)="navigateToProduct(product.id)"
+        />
+        <h3 class="product-name" (click)="navigateToProduct(product.id)">
+          {{ product.name }}
+        </h3>
         <p class="product-price">{{ product.price | currency }}</p>
         <button class="btn-primary" (click)="quickShop(product)">Quick Shop</button>
       </div>

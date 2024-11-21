@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../product.model';
+import { ShoppingCartService } from '../../pages/shopping-cart/shopping-cart.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -18,6 +19,16 @@ export class ProductModalComponent {
   @Output() closeModal = new EventEmitter<void>();
   @Output() addToWishlist = new EventEmitter<Product>();
   @Output() sizeSelected = new EventEmitter<string>();
+
+  constructor(private shoppingCartService: ShoppingCartService) {}
+
+  addToCart(): void {
+    if (this.selectedProduct && this.selectedSize) {
+      this.shoppingCartService.addToCart(this.selectedProduct, this.selectedSize);
+    } else {
+      alert('Please select a size first.');
+    }
+  }
 
   closeProductModal(): void {
     this.closeModal.emit();
