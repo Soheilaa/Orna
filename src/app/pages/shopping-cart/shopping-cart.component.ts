@@ -13,6 +13,7 @@ import { Product } from '../../product.model';
 export class ShoppingCartComponent implements OnInit {
   cartItems: { product: Product; quantity: number; selectedSize: string }[] = [];
   cartCount: number = 0;
+  totalPrice: number = 0;
 
   constructor(private shoppingCartService: ShoppingCartService) {}
 
@@ -20,9 +21,16 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
       this.cartCount = items.reduce((count, item) => count + item.quantity, 0);
+      this.calculateTotalPrice(); // Calculate total price when cart items are updated
     });
   }
 
+  calculateTotalPrice(): void {
+    this.totalPrice = this.cartItems.reduce((total, item) => {
+      return total + item.product.price * item.quantity; // Assuming 'product.price' is the price of the item
+    }, 0);
+  }
+  
   onQuantityChange(event: Event, productId: number, selectedSize: string): void {
     const inputElement = event.target as HTMLInputElement;
     const value = inputElement?.value || '1';  // Default to '1' if no value is provided
