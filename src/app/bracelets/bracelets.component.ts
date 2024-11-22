@@ -5,25 +5,24 @@ import { ProductModalComponent } from '../components/product-modal/product-modal
 import { WishlistService } from '../pages/wishlist/wishlist.service'; 
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { Router,ActivatedRoute  } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bracelets',
   standalone: true,
-  imports: [CommonModule, ProductModalComponent,MatIconModule],
+  imports: [CommonModule, ProductModalComponent, MatIconModule],
   templateUrl: './bracelets.component.html',
   styleUrls: ['./bracelets.component.css'],
 })
 export class BraceletsComponent implements OnInit {
-  
   filteredCollections: Product[] = [];
-
   selectedProduct: Product | null = null;
   selectedSize: string = '';
   activeSection: string = 'details';
   selectedCategory: string = 'all';
   selectedSortOption: string = '';
   isSortDropdownOpen: boolean = false;
+  selectedPriceRange: { min: number; max: number } | null = null;
 
   products: Product[] = products;
 
@@ -35,7 +34,8 @@ export class BraceletsComponent implements OnInit {
     { label: 'Above $200', min: 200, max: 9999 },
   ];
 
-  constructor(private router: Router, 
+  constructor(
+    private router: Router,
     private wishlistService: WishlistService,
     private route: ActivatedRoute
   ) {}
@@ -43,12 +43,10 @@ export class BraceletsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const categoryName = params['categoryName'];
-      if (categoryName) {
-        this.selectedCategory = categoryName;
-        this.filterProducts();
-      }
+      this.selectedCategory = categoryName || 'all'; // Default to 'all' if no category is provided
+      this.filterProducts(); // Apply the filter whenever the route changes
     });
-  
+
     this.filteredCollections = this.products.map(product => ({
       ...product,
       isFavorite: false,
@@ -56,24 +54,36 @@ export class BraceletsComponent implements OnInit {
   }
 
   selectCategory(category: string) {
+    this.router.navigate([`/category/${category}`]); 
     this.selectedCategory = category;
-    this.filterProducts(); 
-    this.router.navigate([`/category/${category}`]);
+    this.filterProducts();
   }
 
-  filterProducts(range?: { min: number; max: number }) {
+  filterProducts() {
+    let filtered = this.products;
+  
+    // Filter by category
     if (this.selectedCategory !== 'all') {
-      this.filteredCollections = this.products.filter(
-        product => product.category === this.selectedCategory
-      );
-    } else {
-      // If 'all' is selected, show all products
-      this.filteredCollections = this.products;
+      filtered = filtered.filter(product => product.category === this.selectedCategory);
     }
+  
+    // Filter by price range
+    if (this.selectedPriceRange) {
+      filtered = filtered.filter(
+        product =>
+          product.price >= this.selectedPriceRange?.min! &&
+          product.price <= this.selectedPriceRange?.max!
+      );
+    }
+  
+    this.filteredCollections = filtered;
   }
+  
+  
 
   filterByPrice(range: { min: number; max: number }) {
-    this.filterProducts(range);
+    this.selectedPriceRange = range; 
+    this.filterProducts();
   }
 
   toggleSortDropdown() {
@@ -87,9 +97,9 @@ export class BraceletsComponent implements OnInit {
 
   sortProducts(option: string) {
     if (option === 'Price: Low to High') {
-      this.filteredCollections.sort((a: Product, b: Product) => a.price - b.price);
+      this.filteredCollections.sort((a, b) => a.price - b.price);
     } else if (option === 'Price: High to Low') {
-      this.filteredCollections.sort((a: Product, b: Product) => b.price - a.price);
+      this.filteredCollections.sort((a, b) => b.price - a.price);
     }
   }
 
@@ -104,7 +114,6 @@ export class BraceletsComponent implements OnInit {
   navigateToProduct(productId: number) {
     this.router.navigate(['/product-detail', productId]);
   }
-  
 
   toggleFavorite(product: Product) {
     product.isFavorite = !product.isFavorite;
@@ -114,6 +123,7 @@ export class BraceletsComponent implements OnInit {
       this.wishlistService.removeFromWishlist(product);
     }
   }
+
   selectSize(size: string) {
     this.selectedSize = size;
     console.log('Selected size:', size);

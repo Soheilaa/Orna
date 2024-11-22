@@ -22,6 +22,9 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent},
   { path: 'shipping-info', component: ShippingInfoComponent},
   { path: 'checkout-payment', component: CheckoutPaymentComponent},
+  { path: '', redirectTo: '/category/bracelets', pathMatch: 'full' },
+  { path: 'category/bracelets', component: BraceletsComponent },
+  { path: 'category/necklaces', component: NecklaceListComponent },
 ];
 
 @NgModule({

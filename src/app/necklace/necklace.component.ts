@@ -27,7 +27,7 @@ export class NecklaceListComponent implements OnInit {
   selectedCategory: string = 'all'; // Default category
   selectedSortOption: string = '';
   isSortDropdownOpen: boolean = false;
-  
+  selectedPriceRange: { min: number; max: number } | null = null;
   products: Product[] = necklaces; // Use the necklaces array
 
   sortOptions: string[] = ['Price: Low to High', 'Price: High to Low', 'Newest', 'Best Seller'];
@@ -48,28 +48,36 @@ export class NecklaceListComponent implements OnInit {
   }
 
   selectCategory(category: string) {
+    this.router.navigate([`/category/${category}`]); 
     this.selectedCategory = category;
-    this.filterProducts(); 
+    this.filterProducts();
   }
 
-  filterProducts(range?: { min: number; max: number }) {
+  
+  filterProducts() {
+    let filtered = this.products;
+  
+    // Filter by category
     if (this.selectedCategory !== 'all') {
-      this.filteredCollections = this.products.filter(product => product.category === this.selectedCategory || this.selectedCategory === 'all');
-    } else {
-      this.filteredCollections = this.products;
+      filtered = filtered.filter(product => product.category === this.selectedCategory);
     }
   
-    if (range) {
-      this.filteredCollections = this.filteredCollections.filter(product =>
-        product.price >= range.min && product.price <= range.max
+    // Filter by price range
+    if (this.selectedPriceRange) {
+      filtered = filtered.filter(
+        product =>
+          product.price >= this.selectedPriceRange?.min! &&
+          product.price <= this.selectedPriceRange?.max!
       );
     }
-    console.log(this.filteredCollections);  // Debugging log after filtering
+  
+    this.filteredCollections = filtered;
   }
   
 
   filterByPrice(range: { min: number; max: number }) {
-    this.filterProducts(range);
+    this.selectedPriceRange = range; 
+    this.filterProducts();
   }
 
   toggleSortDropdown() {
