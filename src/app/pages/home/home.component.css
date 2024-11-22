@@ -200,14 +200,105 @@
     width: 120px; /* Reduce the width on smaller screens */
   }
 
-  .wrap-images-grid {
-    grid-template-columns: 1fr; /* Stack items in one column */
-    grid-template-areas:
-      "video"
-      "image1"
-      "image2"
-      "image3"
-      "image4"
-      "image5";
+  .carousel {
+    height: 19vh;
+    padding: 0;
   }
+  .carousel-container {
+    margin: 0;
+  }
+  .carousel-overlay {
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .carousel-image {
+    object-fit:fill;
+  }
+  .carousel-overlay h2 {
+    font-size: 15px;
+  }
+
+  .carousel-overlay button {
+    padding: 8px 7px;
+    font-size: 10px;
+  }
+
+  .carousel-control {
+    font-size: 24px; /* Smaller control buttons */
+    padding: 5px;
+  }
+
+  .carousel-control.prev {
+    left: 5px;
+  }
+
+  .carousel-control.next {
+    right: 5px;
+  }
+  .wrap-section {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 2rem;
+  }
+
+  .wrap-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .wrap-title {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .wrap-title h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .wrap-title p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .wrap-images-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    grid-auto-rows: auto; /* Adjust rows automatically */
+    gap: 10px;
+    width: 100%;
+  }
+
+  .wrap-item {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .wrap-item img,
+  .wrap-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .wrap-item.video {
+    grid-column: span 2; /* Video spans both columns */
+    aspect-ratio: 16 / 9; /* Maintain cinematic aspect ratio for video */
+  }
+
+  .wrap-item img {
+    aspect-ratio: 1 / 1; /* Ensure square images */
+  }
+
 }
