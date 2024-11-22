@@ -5,7 +5,7 @@ import { ProductModalComponent } from '../components/product-modal/product-modal
 import { WishlistService } from '../pages/wishlist/wishlist.service'; 
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute  } from '@angular/router';
 
 @Component({
   selector: 'app-bracelets',
@@ -35,7 +35,20 @@ export class BraceletsComponent implements OnInit {
     { label: 'Above $200', min: 200, max: 9999 },
   ];
 
+  constructor(private router: Router, 
+    private wishlistService: WishlistService,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      const categoryName = params['categoryName'];
+      if (categoryName) {
+        this.selectedCategory = categoryName;
+        this.filterProducts();
+      }
+    });
+  
     this.filteredCollections = this.products.map(product => ({
       ...product,
       isFavorite: false,
@@ -45,19 +58,17 @@ export class BraceletsComponent implements OnInit {
   selectCategory(category: string) {
     this.selectedCategory = category;
     this.filterProducts(); 
+    this.router.navigate([`/category/${category}`]);
   }
 
   filterProducts(range?: { min: number; max: number }) {
     if (this.selectedCategory !== 'all') {
-      this.filteredCollections = this.products.filter(product => product.category === this.selectedCategory);
-    } else {
-      this.filteredCollections = this.products;
-    }
-    
-    if (range) {
-      this.filteredCollections = this.filteredCollections.filter(product =>
-        product.price >= range.min && product.price <= range.max
+      this.filteredCollections = this.products.filter(
+        product => product.category === this.selectedCategory
       );
+    } else {
+      // If 'all' is selected, show all products
+      this.filteredCollections = this.products;
     }
   }
 
@@ -89,8 +100,6 @@ export class BraceletsComponent implements OnInit {
   closeProductModal() {
     this.selectedProduct = null;
   }
-
-  constructor(private router: Router, private wishlistService: WishlistService) {}
 
   navigateToProduct(productId: number) {
     this.router.navigate(['/product-detail', productId]);

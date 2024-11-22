@@ -7,11 +7,29 @@ import { Product } from '../../product.model';
   providedIn: 'root',
 })
 export class ShoppingCartService {
+  
   private cartItems: { product: Product; quantity: number; selectedSize: string }[] = [];
   private cartSubject = new BehaviorSubject<{ product: Product; quantity: number; selectedSize: string }[]>([]);
+  private shippingInfoSubject = new BehaviorSubject<any>(null);
+  private deliveryMethodSubject = new BehaviorSubject<string>('Standard'); // Default delivery method
+  private paymentInfoSubject = new BehaviorSubject<any>(null); 
 
   get cartItems$() {
     return this.cartSubject.asObservable();
+  }
+
+  get shippingInfo$() {
+      return this.shippingInfoSubject.asObservable();
+    }
+
+  // Delivery Method Observable
+  get deliveryMethod$() {
+    return this.deliveryMethodSubject.asObservable();
+  }
+
+  // Payment Info Observable
+  get paymentInfo$() {
+    return this.paymentInfoSubject.asObservable();
   }
 
   addToCart(product: Product, size: string): void {
@@ -51,5 +69,31 @@ export class ShoppingCartService {
 
   getCartCount(): number {
     return this.cartItems.reduce((count, item) => count + item.quantity, 0);
+  }
+  
+  updateShippingInfo(info: any): void {
+    this.shippingInfoSubject.next(info);
+  }
+
+  getShippingInfo(): any {
+    return this.shippingInfoSubject.value;
+  }
+
+  // Delivery Method Management
+  setDeliveryMethod(method: string): void {
+    this.deliveryMethodSubject.next(method);
+  }
+
+  getDeliveryMethod(): string {
+    return this.deliveryMethodSubject.value;
+  }
+
+  // Payment Info Management
+  updatePaymentInfo(info: any): void {
+    this.paymentInfoSubject.next(info);
+  }
+
+  getPaymentInfo(): any {
+    return this.paymentInfoSubject.value;
   }
 }

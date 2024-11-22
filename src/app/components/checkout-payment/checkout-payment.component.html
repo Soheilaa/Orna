@@ -1,0 +1,105 @@
+<div class="container">
+    <!-- Left Column: Step Navigation and Delivery Info -->
+    <div class="left-column">
+      <!-- Step Navigation -->
+      <div class="step-navigation">
+        <span class="step step1" [class.active]="currentStep >= 1">1</span>
+        <span class="step step2" [class.active]="currentStep >= 2">2</span>
+        <span class="step step3" [class.active]="currentStep >= 3">3</span>
+      </div>           
+      
+      <!-- Delivery Information -->
+      <div class="delivery-info">
+        <div class="delivery-details">
+          <div class="edit-option">
+            <h2>Delivery Information</h2>
+            <button (click)="editDelivery()">Edit</button>
+          </div>
+          <hr />
+          <div class="info-box">
+            <p><strong>Name:</strong> {{ shippingInfo.name }}</p>
+            <p><strong>Address:</strong> {{ shippingInfo.address }}</p>
+            <p><strong>City:</strong> {{ shippingInfo.city }}</p>
+            <p><strong>Postal Code:</strong> {{ shippingInfo.postalCode }}</p>
+            <p><strong>Phone:</strong> {{ shippingInfo.phone }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Delivery Method -->
+      <div class="delivery-method">
+        <div class="delivery-method-info">
+          <div class="edit-option">
+            <h2>Delivery Method</h2>
+            <button (click)="editDeliveryMethod()">Edit</button>
+          </div>
+          <hr />
+          <div class="info-box">
+            <p><strong>Delivery ({{ cartCount }} items)</strong> </p>
+            <p><strong>Method:</strong> {{ selectedDeliveryMethod }}</p>
+            <div class="info-box-contain">
+                <p><strong>Price:</strong></p>
+                <p>$ {{ deliveryPrice }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Payment Section -->
+      <div class="payment">
+        <h2>Payment</h2>
+        <hr />
+        <div class="payment-options">
+          <label>
+            <input type="checkbox" [(ngModel)]="billingSameAsShipping" /> Billing address same as shipping
+          </label>
+          <div class="payment-methods">
+            <h3>Payment Methods</h3>
+            <div class="payment-form">
+              <div class="card-info">
+                <input type="text" placeholder="Card Number" [(ngModel)]="cardNumber" />
+                <input type="text" placeholder="CVV" [(ngModel)]="cvv" />
+                <input type="text" placeholder="Expiration Date (MM/YY)" [(ngModel)]="expiryDate" />
+                <input type="text" placeholder="Cardholder Name" [(ngModel)]="cardHolderName" />
+              </div>
+              <div class="payment-options">
+                <label class="payment-option">
+                  <input type="radio" name="paymentOption" [(ngModel)]="paymentOption" value="klarna" />
+                  <span>Klarna</span>
+                </label>
+                <label class="payment-option">
+                  <input type="radio" name="paymentOption" [(ngModel)]="paymentOption" value="paypal" />
+                  <span>PayPal</span>
+                </label>
+                <label class="payment-option">
+                  <input type="radio" name="paymentOption" [(ngModel)]="paymentOption" value="swish" />
+                  <span>Swish</span>
+                </label>
+              </div>
+                           
+            </div>
+            <hr />
+          </div>
+  
+          <!-- Terms & Conditions -->
+          <div class="terms">
+            <label><input type="checkbox" [(ngModel)]="acceptTerms" /> Accept the terms of use. To read the privacy policy, <a href="#">click here</a></label>
+          </div>
+          <button (click)="placeOrder()" [disabled]="!acceptTerms">Place Your Order</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Right Column: Order Summary -->
+    <div class="right-column">
+      <div class="summary-box">
+        <h2>ORDER SUMMARY</h2>
+        <p><strong>Subtotal:</strong> $ {{ subtotal }}</p>
+        <p><strong>Shipping:</strong> $ {{ shipping }}</p>
+        <p><strong>Discount:</strong> -$ {{ discount }}</p>
+        <hr />
+        <p><strong>Total:</strong> $ {{ totalPrice }}</p>
+      </div>
+    </div>
+  </div>
+  

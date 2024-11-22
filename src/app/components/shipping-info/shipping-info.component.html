@@ -1,0 +1,121 @@
+<div class="container">
+  <!-- Left Column: Step Navigation and Delivery Info -->
+  <div class="left-column">
+    <!-- Step Navigation -->
+    <div class="step-navigation">
+      <span class="step step1" [class.active]="currentStep >= 1">1</span>
+      <span class="step step2" [class.active]="currentStep >= 2">2</span>
+      <span class="step step3" [class.active]="currentStep >= 3">3</span>
+    </div>
+
+    <!-- Delivery Method Section -->
+    <div class="form-container">
+      <h2>Delivery Method</h2>
+      <hr>
+      <!-- Delivery Method Icon and Info -->
+      <div class="delivery-method">
+        <i class="fa-solid fa-truck"></i>
+        <div class="delivery-text">
+          <strong>Delivery</strong> ({{ cartCount }} items)
+        </div>
+      </div>
+      <!-- Product List -->
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <!-- Product Image -->
+        <div class="product-image">
+          <img [src]="item.product.image" alt="{{ item.product.name }}">
+        </div>
+        <!-- Product Info -->
+        <div class="product-info">
+            
+          <div class="product-name-size">
+            <p><strong>{{ item.product.name }}</strong></p>
+            <p class="product-price">Price: $ {{ item.product.price * item.quantity }}</p>
+            <p>Size: {{ item.selectedSize }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+          </div>
+         
+        </div>
+      </div>
+
+      <div class="delivery-options">
+        <div class="delivery-box">
+          <label class="checkbox-container">
+            <input type="checkbox" [(ngModel)]="isStandardDelivery" />
+            <span class="checkbox-label">Standard Delivery</span>
+            <span class="delivery-time">3-5 weekdays</span>
+            <span class="delivery-cost">Free</span>
+          </label>
+        </div>
+
+        <div class="delivery-box">
+          <label class="checkbox-container">
+            <input type="checkbox" [(ngModel)]="isExpressDelivery" />
+            <span class="checkbox-label">Express Delivery</span>
+            <span class="delivery-time">1-3 weekdays</span>
+            <span class="delivery-cost">$ 15</span>
+          </label>
+        </div>
+      </div>
+      <!-- Next Button -->
+      <button type="button" (click)="goToNextStep()">Next: PAYMENT</button>
+    </div>
+  </div>
+
+  <!-- Right Column: Order Summary, Shipping Info, Help Section -->
+  <div class="right-column">
+    <div class="summary-box">
+      <h2>ORDER SUMMARY</h2>
+      <p><strong>Subtotal</strong> <span class="price">$ {{ subtotal }}</span></p>
+      <p><strong>Shipping</strong> <span class="price">$ {{ shipping }}</span></p>
+      <p id="summary-box-P"><strong>Shipping Discount</strong> <span class="price">-$ {{ shippingDiscount }}</span></p>
+      <HR/>
+      <p class="total"><strong>Total</strong> <span class="price">$ {{ totalPrice }}</span></p>
+      <p class="tax-info">Tax included</p>
+    </div>
+
+    <div class="order-info">
+      <div class="extended-returns">
+        <i class="fa-solid fa-rotate-left"></i>
+        <div class="returns-text">
+          <strong>Extended Returns:</strong>
+          <p>Orders placed after 11/11/2024 can be returned or exchanged until 12/01/2025</p>
+        </div>
+      </div>
+      <div class="shipping-info">
+        <i class="fa-solid fa-truck"></i>
+        <div class="shipping-details">
+          <p><strong>Free shipping on all orders over $ 49</strong></p>
+          <p><strong>Standard Delivery:</strong> 3-5 working days</p>
+          <p><strong>Express Delivery:</strong> 1-3 working days</p>
+        </div>
+      </div>            
+    </div>
+
+    <div class="help-section">
+      <div class="help-info">
+        <i class="fa-solid fa-phone"></i>
+        <p><strong>Do you need help?</strong><br>Call us: +46 (0) 20-79 68 75</p>
+      </div>
+      <div class="help-info">
+        <i class="fa-solid fa-mobile"></i>
+        <p><strong>Mon - Fri</strong><br>09:00 - 17:00</p>
+      </div>
+      <p class="note">
+        *Please note, calls are free from all SE landlines. Charges for SE mobile networks may apply. 
+        Please check with your network provider.
+      </p>
+    </div> 
+    <div class="payment-methods">
+      <div>
+        <p><strong>Payment Methods:</strong></p>
+      </div>
+      <div>
+        <img src="../../../assets/payment method/mastercard_icon.png" alt="MasterCard" class="payment-icon">
+        <img src="../../../assets/payment method/klarna icon.png" alt="Klarna" class="payment-icon">
+        <img src="../../../assets/payment method/paypal_icon.png" alt="PayPal" class="payment-icon">
+        <img src="../../../assets/payment method/applepay_icon.png" alt="Apple" class="payment-icon">
+      </div>
+    </div>
+  </div>
+</div>

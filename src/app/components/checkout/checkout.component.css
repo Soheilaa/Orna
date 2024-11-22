@@ -1,0 +1,421 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+}
+
+/* Main container for layout */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+/* Step navigation */
+.step-navigation {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.step {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    text-align: center;
+    line-height: 50px;
+    margin: 0 10px;
+    font-weight: bold;
+    color: #666;
+    position: relative;
+}
+
+.step.active {
+    background-color: #282828;
+    color: white;
+}
+
+.step-navigation .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 25px;
+    right: -64px;
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+}
+
+.step-navigation .step:last-child::after {
+    display: none;
+}
+
+/* Left column (form) */
+.left-column {
+    width: 60%;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Right column (order summary) */
+.right-column {
+    width: 35%;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 380px;
+}
+
+/* Form layout */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+}
+
+h2, h3 {
+    margin-bottom: 15px;
+}
+
+/* Inputs and buttons styling */
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+button {
+    background-color: #111111;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #353535;
+}
+
+/* Order summary styles */
+.right-column .summary-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5; 
+    border-radius: 3px;
+}
+
+.right-column .summary-box p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+#summary-box-P {
+    color: #00823a;
+}
+.right-column .summary-box .total {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #333;
+}
+
+.right-column .summary-box .tax-info {
+    font-size: 12px;
+    color: #777;
+    text-align: right;
+    margin-top: -10px;
+}
+
+/* Order Info */
+.right-column .order-info {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Payment icons */
+.payment-methods img {
+    margin-right: 10px;
+    width: 30px;
+}
+
+.order-info {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+.order-info p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #444;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.order-info p strong {
+    margin-right: auto;
+}
+
+.order-info p i {
+    font-size: 18px;
+    margin-right: 8px;
+    color: #4CAF50;
+}
+
+.order-info .edit {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.order-info .edit:hover {
+    color: #0056b3;
+}
+
+/* Shipping Info Styling */
+.shipping-info {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.shipping-info i {
+    font-size: 20px;
+    color: #2a2a2a;
+    margin-right: 15px;
+}
+
+.shipping-info .shipping-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.shipping-info .shipping-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+    border: none;
+}
+
+.shipping-info .shipping-details p strong {
+    color: #333;
+}
+
+/* Help Section Styling */
+.help-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.help-section .help-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.help-section .help-info i {
+    font-size: 24px;
+    color: #4CAF50;
+    margin-right: 15px;
+}
+
+.help-section .help-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.help-section .help-info p strong {
+    color: #333;
+}
+
+.help-section .note {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+/* Payment Methods */
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.payment-methods img.payment-icon {
+    height: 40px;
+    width: auto;
+    padding: 3px;
+}
+
+.payment-methods p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.payment-methods i {
+    font-size: 24px;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.payment-methods i:hover {
+    transform: scale(1.2);
+    color: #010101;
+}
+
+/* Extended Returns Styling */
+.extended-returns {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.extended-returns i {
+    font-size: 24px;
+    color: #000000;
+    margin-right: 10px;
+}
+
+.extended-returns .returns-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.extended-returns .returns-text p {
+    margin: 0;
+    font-size: 12px;
+    color: #555;
+    border: none;
+}
+
+/* Error styling */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: -8px;
+}
+
+@media (max-width: 768px) {
+    .form-container,form input{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .left-column, .right-column {
+        width: 100% !important;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .step-navigation {
+        display: flex;
+        justify-content: space-between; /* Distribute steps evenly */
+        width: 100%; /* Ensure it takes the full width of the form container */
+        margin-bottom: 20px;
+    }
+    
+    .step {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        color: #666;
+        position: relative;
+    }
+    
+    .step.active {
+        background-color: #1d1d1d;
+        color: white;
+    }
+    
+    .step-navigation .step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 15px;
+        right: -80px;
+        width: 100%;
+        height: 2px;
+        background-color: #ccc;
+    }
+    
+    .step-navigation .step:last-child::after {
+        display: none;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="tel"],
+    .form-container input[type="email"],
+    .form-container button {
+        width: 100%;
+    }
+
+    .right-column .summary-box {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .right-column .help-section,
+    .right-column .payment-methods {
+        text-align: center;
+    }
+}

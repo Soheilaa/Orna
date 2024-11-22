@@ -12,15 +12,6 @@
   <div class="container">
  
     <div class="filter-sidebar">
-      <h2>Filters</h2>
-      <div class="category-filter">
-        <h4>Category</h4>
-        <ul>
-          <li (click)="selectCategory('all')" [class.active]="selectedCategory === 'all'">All</li>
-          <li (click)="selectCategory('bracelets')" [class.active]="selectedCategory === 'bracelets'">Bracelets</li>
-          <li (click)="selectCategory('necklaces')" [class.active]="selectedCategory === 'necklaces'">Necklaces</li>
-        </ul>
-      </div>
       <div class="sort-dropdown">
         <button (click)="toggleSortDropdown()" class="sort-button">
          <strong> Sort: </strong>{{ selectedSortOption || 'Select an option' }}
@@ -32,6 +23,17 @@
           </li>
         </ul>
       </div>
+
+      <h2>Filters</h2>
+      <div class="category-filter">
+        <h4>Category</h4>
+        <ul>
+          <li (click)="selectCategory('all')" [class.active]="selectedCategory === 'all'">All</li>
+          <li (click)="selectCategory('bracelets')" [class.active]="selectedCategory === 'bracelets'">Bracelets</li>
+          <li (click)="selectCategory('necklaces')" [class.active]="selectedCategory === 'necklaces'">Necklaces</li>
+        </ul>
+      </div>
+    
       <div class="price-filter">
         <h2>Price</h2>
         <div *ngFor="let range of priceRanges" (click)="filterByPrice(range)" class="price-range">

@@ -7,6 +7,9 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { NecklaceListComponent } from './necklace/necklace.component';
 import { ProductDetailComponent } from '../app/components/product-details/product-details.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from '../app/components/checkout/checkout.component';
+import { ShippingInfoComponent } from '../app/components/shipping-info/shipping-info.component';
+import { CheckoutPaymentComponent } from '../app/components/checkout-payment/checkout-payment.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'necklaces', component: NecklaceListComponent},
   { path: 'product-detail/:id', component: ProductDetailComponent},
   { path: 'shopping-cart', component: ShoppingCartComponent},
+  { path: 'checkout', component: CheckoutComponent},
+  { path: 'shipping-info', component: ShippingInfoComponent},
+  { path: 'checkout-payment', component: CheckoutPaymentComponent},
 ];
 
 @NgModule({

@@ -1,76 +1,106 @@
-<!-- <div class="cart-container">
-    <h3>My Cart ({{ cartCount }} item{{ cartCount > 1 ? 's' : '' }})</h3>
-    <p *ngIf="cartCount >= 1">You get free shipping!</p>
-    <div class="cart-items">
-      <div *ngFor="let item of cartItems" class="cart-item">
-        <div class="item-details">
-          <div class="product-image">
-            <img
-            *ngIf="item.product?.image"
-            [src]="item.product.image"
-            [alt]="item.product.name"
-            class="product-detail-image"
-          />
-          </div>
-          <span class="product-name">{{ item.product.name }}</span>
-          <span class="product-details">
-            Size: {{ item.selectedSize }}, Metal: {{ item.product.metal }}
-          </span>
-        </div>
-        <div class="item-actions">
-          <input type="number" [value]="item.quantity" (change)="onQuantityChange($event, item.product.id, item.selectedSize)" />
-
-          <button (click)="removeFromCart(item.product.id, item.selectedSize)">
-            Remove
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-   -->
-
-   <div class="cart-container">
-    <div class="cart-header">
-      <h3>My Cart ({{ cartCount }} item{{ cartCount > 1 ? 's' : '' }})</h3>
-      <p *ngIf="cartCount >= 1">You get free shipping!</p>
-    </div>
-  
-    <div class="cart-items">
-      <div *ngFor="let item of cartItems" class="cart-item">
-        <div class="item-details">
-          <div class="product-image">
-            <img
-              *ngIf="item.product?.image"
-              [src]="item.product.image"
-              [alt]="item.product.name"
-              class="product-image-img"
-            />
-          </div>
-          <div class="product-info">
-            <span class="product-name">{{ item.product.name }}</span>
-            <span class="product-details">
-              Size: {{ item.selectedSize }}, Metal: {{ item.product.metal }}
-            </span>
-          </div>
-        </div>
-  
-        <div class="item-actions">
-          <input type="number" [value]="item.quantity" (change)="onQuantityChange($event, item.product.id, item.selectedSize)" />
-  
-          <button (click)="removeFromCart(item.product.id, item.selectedSize)">
-            <span class="remove-text">Remove</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  
-    <div class="cart-footer">
-      <div class="cart-summary">
-        <p>Total Items: {{ cartCount }}</p>
-        <p>Total Price: ${{ totalPrice.toFixed(2) }}</p> <!-- Display total price with 2 decimal points -->
-      </div>
-      <button class="checkout-btn">Proceed to Checkout</button>
-    </div>
+<div class="cart-container">
+  <div *ngIf="cartCount === 0" class="empty-cart">
+    <img src="assets/empty-cart.png" alt="Empty Cart" class="empty-cart-image" />
+    <h3>Your Cart is Empty</h3>
+    <p>Looks like you haven’t added anything to your cart yet.</p>
+    <button class="shop-now-btn" (click)="redirectToShop()">Shop Now</button>
   </div>
   
+  <div class="cart-container">
+    <div class="cart-main">
+      <div class="cart-header">
+        <h3>My Cart ({{ cartCount }} item{{ cartCount > 1 ? 's' : '' }})</h3>
+        <p *ngIf="cartCount >= 1">You get free shipping!</p>
+      </div>
+  
+      <div class="cart-items">
+        <div *ngFor="let item of cartItems" class="cart-item">
+          <div class="item-details">
+            <div class="product-image">
+              <img
+                *ngIf="item.product?.image"
+                [src]="item.product.image"
+                [alt]="item.product.name"
+                class="product-image-img"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-name">{{ item.product.name }}</div>
+              <div class="product-details">
+                <div>Size: {{ item.selectedSize }}</div>
+                <div>Metal: {{ item.product.metal }}</div>
+              </div>
+            </div>
+            <div class="product-price">
+              ${{ item.product.price.toFixed(2) }}
+              <div class="quantity-controls">
+                <button class="quantity-btn" (click)="decreaseQuantity(item.product.id, item.selectedSize)">-</button>
+                <input
+                  type="number"
+                  [value]="item.quantity"
+                  class="quantity-input"
+                  (change)="onQuantityChange($event, item.product.id, item.selectedSize)"
+                />
+                <button class="quantity-btn" (click)="increaseQuantity(item.product.id, item.selectedSize)">+</button>
+              </div>
+            </div>
+          </div>
+  
+          <div class="item-actions">
+            <div class="quantity-controls">
+              <button class="wishlist-btn" (click)="addToWishlist(item.product.id)">
+                <i class="fa fa-heart"></i>
+              </button>
+              <button class="remove-btn" (click)="removeFromCart(item.product.id, item.selectedSize)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+            <button class="remove-btn" (click)="removeFromCart(item.product.id, item.selectedSize)">Remove</button>
+            <button class="wishlist-btn" (click)="addToWishlist(item.product.id)">Add to Wishlist</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Order Summary Column -->
+    <div class="cart-summary-container">
+      <h3>Order Summary</h3>
+  
+      <div class="summary-item">
+        <label for="discount-code">Discount Code</label>
+        <input id="discount-code" type="text" placeholder="Enter code" />
+      </div>
+  
+      <div class="summary-item">
+        <label for="gift-packing">
+          <input id="gift-packing" type="checkbox" /> Gift Packing
+        </label>
+      </div>
+  
+      <hr />
+  
+      <div class="summary-details">
+        <div class="detail-row">
+          <span>Subtotal ({{ cartCount }} items)</span>
+          <span>${{ totalPrice.toFixed(2) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>Shipping</span>
+          <span>$7.00</span>
+        </div>
+        <div class="detail-row">
+          <span>Shipping Discount</span>
+          <span>-$7.00</span>
+        </div>
+        <hr />
+        <div class="detail-row total">
+          <span>Total</span>
+          <span>${{ totalPrice.toFixed(2) }}</span>
+        </div>
+        <p class="tax-note">Tax included</p>
+      </div>
+  
+      <button class="pay-now-btn" (click)="payNow()">Pay Now</button>
+    </div>
+  </div>
   
